@@ -1,10 +1,10 @@
 # calculator
 
-> A Vue.js project
+> Rekenmachine: optellen, aftrekken, vermenigvuldigen, delen.
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
