@@ -1,91 +1,89 @@
 <template>
-  <div id="app" class="pt-5">
-    <div class="container">
-      <h2>{{ title }}</h2>
-      <p>{{ description }}</p>
-      <div class="calculator shadow-md p-3 mb-5 bg-white rounded">
-        <div class="calculator-display">
-          <div class="calculator-display-answer container-fluid">
-            <span>&nbsp;{{ answer }}</span>
+  <div>
+    <h2>{{ title }}</h2>
+    <p>{{ description }}</p>
+    <div class="calculator shadow-md p-3 mb-5 bg-white rounded">
+      <div class="calculator-display">
+        <div class="calculator-display-answer container-fluid">
+          <span>&nbsp;{{ answer }}</span>
+        </div>
+        <div class="calculator-display-sum container-fluid">
+          <span>&nbsp;{{ display }}</span>
+        </div>
+      </div>
+      <div class="calculator-buttons container-fluid">
+        <div class="row">
+          <div class="col-sm calculator-button">
+            <button @click="clear()" class="rounded">C</button>
           </div>
-          <div class="calculator-display-sum container-fluid">
-            <span>&nbsp;{{ display }}</span>
+          <div class="col-sm calculator-button">
+            <button @click="sign()" class="rounded">+/-</button>
+          </div>
+          <div class="col-sm calculator-button">
+            <button disabled class="rounded"></button>
+          </div>
+          <div class="col-sm calculator-button">
+            <button @click="addOperator('+')" :disabled="!canAddOperator" class="rounded">+</button>
           </div>
         </div>
-        <div class="calculator-buttons container-fluid">
-          <div class="row">
-            <div class="col-sm calculator-button">
-              <button @click="clear()" class="rounded">C</button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="sign()" class="rounded">+/-</button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button disabled class="rounded"></button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="addOperator('+')" :disabled="!canAddOperator" class="rounded">+</button>
-            </div>
-          </div>
 
-          <div class="row">
-            <div class="col-sm calculator-button">
-              <button @click="pressNumber('1')" class="rounded">1</button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="pressNumber('2')" class="rounded">2</button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="pressNumber('3')" class="rounded">3</button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="addOperator('-')" :disabled="!canAddOperator" class="rounded">-</button>
-            </div>
+        <div class="row">
+          <div class="col-sm calculator-button">
+            <button @click="pressNumber('1')" class="rounded">1</button>
           </div>
-
-          <div class="row">
-            <div class="col-sm calculator-button">
-              <button @click="pressNumber('4')" class="rounded">4</button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="pressNumber('5')" class="rounded">5</button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="pressNumber('6')" class="rounded">6</button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="addOperator('*')" :disabled="!canAddOperator" class="rounded">*</button>
-            </div>
+          <div class="col-sm calculator-button">
+            <button @click="pressNumber('2')" class="rounded">2</button>
           </div>
-
-          <div class="row">
-            <div class="col-sm calculator-button">
-              <button @click="pressNumber('7')" class="rounded">7</button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="pressNumber('8')" class="rounded">8</button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="pressNumber('9')" class="rounded">9</button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="addOperator('/')" :disabled="!canAddOperator" class="rounded">/</button>
-            </div>
+          <div class="col-sm calculator-button">
+            <button @click="pressNumber('3')" class="rounded">3</button>
           </div>
+          <div class="col-sm calculator-button">
+            <button @click="addOperator('-')" :disabled="!canAddOperator" class="rounded">-</button>
+          </div>
+        </div>
 
-          <div class="row">
-            <div class="col-sm calculator-button">
-              <button disabled class="rounded"></button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="pressNumber('0')" class="rounded">0</button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="comma" class="rounded">,</button>
-            </div>
-            <div class="col-sm calculator-button">
-              <button @click="calculate()" :disabled="!canCalculate" class="rounded">=</button>
-            </div>
+        <div class="row">
+          <div class="col-sm calculator-button">
+            <button @click="pressNumber('4')" class="rounded">4</button>
+          </div>
+          <div class="col-sm calculator-button">
+            <button @click="pressNumber('5')" class="rounded">5</button>
+          </div>
+          <div class="col-sm calculator-button">
+            <button @click="pressNumber('6')" class="rounded">6</button>
+          </div>
+          <div class="col-sm calculator-button">
+            <button @click="addOperator('*')" :disabled="!canAddOperator" class="rounded">*</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm calculator-button">
+            <button @click="pressNumber('7')" class="rounded">7</button>
+          </div>
+          <div class="col-sm calculator-button">
+            <button @click="pressNumber('8')" class="rounded">8</button>
+          </div>
+          <div class="col-sm calculator-button">
+            <button @click="pressNumber('9')" class="rounded">9</button>
+          </div>
+          <div class="col-sm calculator-button">
+            <button @click="addOperator('/')" :disabled="!canAddOperator" class="rounded">/</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm calculator-button">
+            <button disabled class="rounded"></button>
+          </div>
+          <div class="col-sm calculator-button">
+            <button @click="pressNumber('0')" class="rounded">0</button>
+          </div>
+          <div class="col-sm calculator-button">
+            <button @click="comma" class="rounded">,</button>
+          </div>
+          <div class="col-sm calculator-button">
+            <button @click="calculate()" :disabled="!canCalculate" class="rounded">=</button>
           </div>
         </div>
       </div>
@@ -145,6 +143,7 @@ export default {
       var response = await api.calculate(this.num1, this.num2, this.operator);
 
       if (response) this.answer = response.answerString;
+      else this.answer = "Fout bij berekenen";
     }
   },
   computed: {
